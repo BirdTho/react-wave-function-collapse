@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  SideCodes, SideMappings,
+  SideCodes,
+  SideOppositesMap,
   TILESET,
 } from './Tiles';
 
@@ -94,7 +95,7 @@ export default function TilePage() {
         <TileContainer key={`tile_${count++}`}>
           <Tile angle={angle}/>
           <span className="north">{SideCodes[north]}</span>
-          <span className="south">{SideCodes[SideMappings.get(south) as unknown as SideCodes]}</span>
+          <span className="south">{SideCodes[SideOppositesMap.get(south) as unknown as SideCodes]}</span>
           <span className="east">{SideCodes[east]}</span>
           <span className="west">{SideCodes[west]}</span>
           <p>{Tile.name}</p>

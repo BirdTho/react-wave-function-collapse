@@ -106,10 +106,6 @@ const DamMiddle = styled.div`
   background-color: ${DAM};
 `;
 
-const HalfFieldWhite = styled(HalfField)`
-  background-color: ${WHITE};
-`;
-
 const HalfFieldGreen = styled(HalfField)`
   background-color: ${GREEN};
 `;
@@ -137,16 +133,8 @@ const QuarterCircleBlue = styled(QuarterCircle)`
   background-color: ${BLUE};
 `;
 
-const OppositeQuarterCircleWhite = styled(OppositeQuarterCircle)`
-  background-color: ${WHITE};
-`;
-
 const OppositeQuarterCircleGreen = styled(OppositeQuarterCircle)`
   background-color: ${GREEN};
-`;
-
-const OppositeQuarterCircleBlue = styled(OppositeQuarterCircle)`
-  background-color: ${BLUE};
 `;
 
 interface AngleInput {
@@ -258,7 +246,7 @@ export enum SideCodes {
   BDrB,
 }
 
-export const SideMappings = new Map<SideCodes, SideCodes>([
+export const SideOppositesMap = new Map<SideCodes, SideCodes>([
   [SideCodes.WWW, SideCodes.WWW],
   [SideCodes.GBW, SideCodes.WBG],
   [SideCodes.WBG, SideCodes.GBW],
@@ -604,18 +592,18 @@ export const SideCodeArray = [
 ];
 
 export const EastMap = new Map<SideCodes, TileDefinition[]>(SideCodeArray.map((code, i) => {
-  const opposite = SideMappings.get(code);
+  const opposite = SideOppositesMap.get(code);
   return [code, TILESET.filter(({ west }) => west === opposite)];
 }));
 export const NorthMap = new Map<SideCodes, TileDefinition[]>(SideCodeArray.map((code, i) => {
-  const opposite = SideMappings.get(code);
+  const opposite = SideOppositesMap.get(code);
   return [code, TILESET.filter(({ south }) => south === opposite)];
 }));
 export const SouthMap = new Map<SideCodes, TileDefinition[]>(SideCodeArray.map((code, i) => {
-  const opposite = SideMappings.get(code);
+  const opposite = SideOppositesMap.get(code);
   return [code, TILESET.filter(({ north }) => north === opposite)];
 }));
 export const WestMap = new Map<SideCodes, TileDefinition[]>(SideCodeArray.map((code, i) => {
-  const opposite = SideMappings.get(code);
+  const opposite = SideOppositesMap.get(code);
   return [code, TILESET.filter(({ east }) => east === opposite)];
 }));
