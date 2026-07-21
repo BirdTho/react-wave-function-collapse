@@ -20,3 +20,8 @@ export const showPossibilitiesAtom = atom<boolean>({
   key: 'show possibilities',
   default: false,
 });
+
+export const showGridAtom = atom<boolean>({
+  key: 'show grid',
+  default: false,
+});

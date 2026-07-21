@@ -13,8 +13,13 @@ const NavHeader = styled.div`
   gap: 8px;
   
   & > * {
-    background-color: darkgrey;
     padding: 8px 16px;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  
+  & > *:before {
+    content: ">"
   }
 `;
 
@@ -26,6 +31,7 @@ function App() {
           <Link to="/probability">Probability</Link>
           <Link to="/tileset">Tileset view</Link>
           <Link to="/wavefunction">Wave Function</Link>
+          <a href="https://github.com/BirdTho/react-wave-function-collapse">Github</a>
         </NavHeader>
         <Routes>
           <Route path="/probability" element={<DistributionTest />} />

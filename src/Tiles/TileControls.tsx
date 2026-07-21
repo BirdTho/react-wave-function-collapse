@@ -4,7 +4,13 @@ import { useGranularCallback, useGranularEffect } from 'granular-hooks';
 import styled from 'styled-components';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { showPossibilitiesAtom, tileGridAtom, zoomAtom } from './TilesAtoms';
+import {
+  showPossibilitiesAtom,
+  tileGridAtom,
+  zoomAtom,
+  showGridAtom,
+} from './TilesAtoms';
+
 import {
   addXNewAdjacentNodes,
   addXNewNodes,
@@ -21,6 +27,12 @@ const ControlsContainer = styled(ColumnContainer)`
   gap: 8px;
   padding: 16px;
   font-size: 16px;
+
+
+  & .option-group {
+    display: flex;
+    gap: 0.5rem;
+  }
 `;
 
 const SliderContainer = styled.div`
@@ -30,14 +42,33 @@ const SliderContainer = styled.div`
   flex-flow: row nowrap;
   padding: 16px 32px;
   gap: 32px;
+  
+  & > span {
+    font-size: 14px;
+  }
 `;
 
 const StartButton = styled.button`
-  display: flex;
+  width: 7rem;
+  color: #fff;
+  background-color: #ef8302;
+  align-content: center;
+  font-size: 1.75rem;
+  padding: 4px 8px;
+  border: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #ff9d2e;
+  }
+
+  &:active {
+    background-color: #a8640d;
+  }
 `;
 
 const PossibleLabel = styled.label`
-  width: 150px;
+  font-size: 14px;
 `;
 
 const DelayMarks = {
@@ -62,6 +93,7 @@ export default function TileControls() {
   const [tick, setTick] = useState(0);
   const [zoom, setZoom] = useRecoilState(zoomAtom);
   const [showPossibilities, setShowPossibilities] = useRecoilState(showPossibilitiesAtom);
+  const [showGrid, setShowGrid] = useRecoilState(showGridAtom);
 
   useGranularEffect(() => {
     console.log(tick);
@@ -141,12 +173,16 @@ export default function TileControls() {
           />
         </SliderContainer>
       </RowContainer>
-      <RowContainer>
+      <RowContainer style={{ alignItems: 'center', gap: '2rem' }}>
         <StartButton onClick={createGrid}>{running ? 'Stop' : 'Start'}</StartButton>
-        <RowContainer style={{ alignItems: 'center' }}>
+        <div className="option-group">
           <PossibleLabel htmlFor="showPossibilityCheck">Show remaining possibilities</PossibleLabel>
           <input id="showPossibilityCheck" type="checkbox" checked={showPossibilities} onChange={(e) => setShowPossibilities(e.target.checked)} />
-        </RowContainer>
+        </div>
+        <div className="option-group">
+          <PossibleLabel htmlFor="showGridCheck">Show grid</PossibleLabel>
+          <input id="showGridCheck" type="checkbox" checked={showGrid} onChange={(e) => setShowGrid(e.target.checked)} />
+        </div>
       </RowContainer>
     </ControlsContainer>
   );
